@@ -15,7 +15,7 @@ class CardSwiper extends StatelessWidget {
     
 
     //peliculas![index].uniqueId = '${ peliculas![index].id }-tarjeta';
-    //()=> Navigator.pushNamed(context, 'detalle', arguments: peliculas![index])
+    //()=> 
 
     return CarouselSlider.builder(
       itemCount: this.peliculas!.length, 
@@ -40,10 +40,17 @@ class MoviePosterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage(
-      image: NetworkImage( pelicula.getPosterImg()  ),
-      placeholder: AssetImage('assets/img/no-image.jpg'),
-      fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: ()=> Navigator.pushNamed(context, 'detalle', arguments: pelicula),
+      child: Hero(
+        tag: pelicula.uniqueId,
+        child: FadeInImage(
+          //image: NetworkImage( pelicula.getPosterImg()  ),
+          image: NetworkImage( pelicula.getPosterImg()  ),
+          placeholder: AssetImage('assets/img/loading.gif'),
+          fit: BoxFit.contain,
+        ),
+      ),
     );
   }
 }
